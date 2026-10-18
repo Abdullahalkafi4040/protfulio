@@ -2,15 +2,15 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Security
+
 SECRET_KEY = 'django-insecure-your-automatically-generated-secret-key-string'
 
-# Production-e False hobe (local testing-er shomoy True rakhte paren)
+
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
-# Application definition (Database-free portfolio-r jonno lightweighted kora holo)
+
 INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "baseapp",
@@ -40,7 +40,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "main.wsgi.application"
 
-# Database bad dewa holo karon Vercel-e SQLite kaj kore na (read-only filesystem)
+
 DATABASES = {}
 
 # Internationalization
@@ -61,7 +61,7 @@ if BASE_STATIC_DIR.is_dir():
 
 STORAGES = {
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
 
