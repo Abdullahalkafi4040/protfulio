@@ -1,0 +1,630 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdullah Al Kafi — Backend & Django Developer</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+      :root {
+        --primary-green: #10b981;
+        --dark-heading: #0f172a;
+        --body-bg: #ffffff;
+        --text-color: #334155;
+        --border-color: #f1f5f9;
+      }
+
+      body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: var(--body-bg);
+        color: var(--text-color);
+        padding-top: 80px;
+        line-height: 1.7;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Navbar Styling */
+      .navbar {
+        background: rgba(255, 255, 255, 0.95) !important;
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .navbar-brand {
+        color: var(--dark-heading) !important;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+      }
+
+      .nav-link {
+        color: #475569 !important;
+        font-weight: 600;
+        margin: 0 5px;
+        transition: all 0.3s ease;
+      }
+
+      .nav-link:hover, .nav-link.active {
+        color: var(--primary-green) !important;
+      }
+
+      .profile-nav-badge {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        padding: 5px 14px;
+        border-radius: 30px;
+      }
+
+      .profile-nav-img {
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        object-fit: cover;
+      }
+
+      /* Hero Banner */
+      .greeting-text {
+        color: #10b981;
+        font-size: 1.15rem;
+        font-weight: 600;
+        margin-bottom: 12px;
+      }
+
+      .hero-title {
+        font-size: 3rem;
+        font-weight: 800;
+        color: #0f172a;
+        line-height: 1.25;
+        letter-spacing: -1px;
+      }
+
+      .hero-profile-box {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+      }
+
+      .hero-profile-img {
+        width: 80px;
+        height: 80px;
+        border-radius: 10px; 
+        object-fit: cover;
+        border: 2px solid #10b981;
+        box-shadow: 0 6px 18px rgba(16, 185, 129, 0.15);
+      }
+
+      .hero-profile-info h5 {
+        margin: 0;
+        font-weight: 700;
+        color: #0f172a;
+        font-size: 1.25rem;
+      }
+
+      .hero-profile-info p {
+        margin: 0;
+        color: #64748b;
+        font-size: 0.95rem;
+        font-weight: 500;
+      }
+
+      .hero-description {
+        font-size: 1.1rem;
+        color: #475569;
+        max-width: 720px;
+      }
+
+      /* Cards & Badges */
+      .custom-card {
+        background: #ffffff;
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+      }
+
+      .custom-card:hover {
+        transform: translateY(-4px);
+        border-color: #a7f3d0;
+        box-shadow: 0 12px 30px rgba(16, 185, 129, 0.08);
+      }
+
+      .badge-tech {
+        background: #ecfdf5;
+        color: #047857;
+        font-weight: 600;
+        padding: 5px 12px;
+        border-radius: 30px;
+        border: 1px solid #a7f3d0;
+        font-size: 0.8rem;
+      }
+
+      .filter-btn {
+        border-radius: 30px;
+        padding: 8px 20px;
+        font-weight: 600;
+        border: 1px solid #e2e8f0;
+        background: #ffffff;
+        color: #475569;
+        transition: all 0.3s ease;
+      }
+
+      .filter-btn.active, .filter-btn:hover {
+        background: var(--primary-green);
+        color: #ffffff;
+        border-color: var(--primary-green);
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+      }
+
+      .social-card {
+        padding: 20px;
+        border-radius: 14px;
+        border: 1px solid #f1f5f9;
+        background: #ffffff;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        text-decoration: none;
+        color: #0f172a;
+      }
+
+      .social-card:hover {
+        border-color: #10b981;
+        background: #f0fdf4;
+        color: #047857;
+        transform: translateY(-3px);
+      }
+
+      .social-icon {
+        font-size: 1.5rem;
+        width: 45px;
+        height: 45px;
+        border-radius: 10px;
+        background: #ecfdf5;
+        color: #10b981;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top shadow-sm py-3">
+    <div class="container">
+      <a class="navbar-brand fs-4" href="#home">Kafi<span class="text-success">.dev</span></a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto me-lg-4 align-items-center">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+
+        <!-- Top Right Profile Badge -->
+        <div class="profile-nav-badge d-none d-lg-flex">
+          <img src="{% static 'base/images/profile/profile.jpg' %}" alt="Abdullah Al Kafi" class="profile-nav-img" onerror="this.src='https://ui-avatars.com/api/?name=Abdullah+Al+Kafi&background=10b981&color=fff&rounded=false'">
+          <span class="fw-bold text-dark small">Abdullah Al Kafi</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    
+    <!-- Hero / Intro Section -->
+    <section id="home" class="min-vh-100 d-flex align-items-center py-5">
+      <div class="w-100">
+        
+        <!-- Greeting -->
+        <div class="greeting-text">
+          Assalamu Alaikum Wa Rahmatullah 🌿
+        </div>
+
+        <!-- Headline -->
+        <h1 class="hero-title">
+          I build scalable Django REST APIs & high-performance Django backend systems.
+        </h1>
+
+        <!-- Profile Box -->
+        <div class="hero-profile-box">
+            <img src="{% static 'base/images/profile/profile.jpg' %}" alt="Abdullah Al Kafi" class="hero-profile-img" onerror="this.src='https://ui-avatars.com/api/?name=Abdullah+Al+Kafi&background=10b981&color=fff&rounded=false'">
+          <div class="hero-profile-info">
+            <h5>Abdullah Al Kafi</h5>
+            <p>Python & Django Developer</p>
+          </div>
+        </div>
+
+        <!-- Bio -->
+        <p class="hero-description mb-4">
+          Hi, I'm <strong>Abdullah Al Kafi</strong>. I am a Computer Science & Engineering graduate passionate about designing secure RESTful services, database architecture, and complete web workflows. Outside of writing clean backend code, I enjoy playing strategic <strong>Chess ♟️</strong> and playing <strong>Football ⚽</strong> in the afternoons.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="d-flex gap-3 pt-2">
+            <a href="#projects" class="btn btn-success btn-lg px-4 py-2 rounded-pill shadow-sm">
+              <i class="bi bi-code-slash me-1"></i> View Projects
+            </a>
+            
+            <a href="{% static 'base/pdf/cv.pdf' %}" class="btn btn-outline-dark btn-lg px-4 py-2 rounded-pill" target="_blank">
+                <i class="bi bi-eye-fill me-1"></i> View CV
+            </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5">
+      <div class="text-center mb-5">
+        <h2 class="display-6 fw-bold">About My Core Engineering Skills</h2>
+        <p class="text-muted">Technologies & stack I utilize daily</p>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="custom-card p-4 p-md-5">
+            <p class="fs-5 text-secondary mb-4">
+              I specialize in architecting relational databases (PostgreSQL/SQLite), building secure authentication protocols (JWT, Token, Session), integrating payment gateways (SSLCommerz), and documenting clean APIs via DRF Spectacular & Swagger UI.
+            </p>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="badge-tech">Python</span>
+              <span class="badge-tech">Django Framework</span>
+              <span class="badge-tech">Django REST Framework (DRF)</span>
+              <span class="badge-tech">PostgreSQL</span>
+              <span class="badge-tech">SSLCommerz Integration</span>
+              <span class="badge-tech">JWT & dj-rest-auth</span>
+              <span class="badge-tech">JavaScript & Bootstrap 5</span>
+              <span class="badge-tech">Git & GitHub</span>
+              <span class="badge-tech">Render Deployment</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience & Capabilities -->
+    <section id="experience" class="py-5">
+      <div class="text-center mb-5">
+        <h2 class="display-6 fw-bold">Experience & Technical Proficiency</h2>
+        <p class="text-muted">Active development & open-source releases (2025–2026)</p>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="custom-card p-4 p-md-5">
+            <div class="border-start border-3 border-success ps-4">
+              <span class="text-success fw-bold">2025 – 2026 (Active Period)</span>
+              <h4 class="fw-bold mt-1">Full-Stack & Django Backend Engineer</h4>
+              <p class="text-secondary mb-2">Architected production-ready web apps, REST APIs, and actively publishing open-source software on GitHub.</p>
+              <ul class="text-secondary small ps-3">
+                <li><strong>Django Backend & Database Architecture:</strong> Designed complex ORM models, relational database schemas, admin extensions, and automated workflows.</li>
+                <li><strong>Django REST Framework (DRF):</strong> Implemented JWT auth, ViewSets, custom Serializers, pagination, filtering, and Swagger UI endpoint documentation.</li>
+                <li><strong>Open Source Contributions:</strong> Published public repositories including <em>online-book-store-with-django</em> and <em>blog_app_with_django_rest_api</em>.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-5">
+      <div class="text-center mb-4">
+        <h2 class="display-6 fw-bold">Featured Software Projects</h2>
+        <p class="text-muted">Explore my Full-Stack systems and Open-Source REST APIs</p>
+      </div>
+
+      <!-- Filter Buttons -->
+      <div class="d-flex justify-content-center gap-2 mb-5">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="fullstack">Full-Stack</button>
+        <button class="filter-btn" data-filter="restapi">REST APIs & Open Source</button>
+      </div>
+      
+      <div class="row g-4" id="project-container">
+        
+        <!-- 1. Primary School Management System -->
+        <div class="col-md-6 col-lg-4 project-item" data-category="fullstack">
+          <div class="custom-card p-3 h-100 d-flex flex-column">
+            <div id="schoolCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
+              <div class="carousel-inner rounded-3">
+                <div class="carousel-item active">
+                  <img src="{% static 'base/images/school/dashboard.png' %}" class="d-block w-100" alt="Dashboard" style="height: 180px; object-fit: cover;">
+                </div>
+                <div class="carousel-item">
+                  <img src="{% static 'base/images/school/student_list.png' %}" class="d-block w-100" alt="Student List" style="height: 180px; object-fit: cover;">
+                </div>
+                <div class="carousel-item">
+                  <img src="{% static 'base/images/school/result_entry.png' %}" class="d-block w-100" alt="Results" style="height: 180px; object-fit: cover;">
+                </div>
+              </div>
+            </div>
+            <div class="p-2 flex-grow-1">
+              <span class="badge bg-primary-subtle text-primary mb-2 fw-semibold">Full-Stack</span>
+              <h4 class="fw-bold mb-2">Primary School Management</h4>
+              <p class="text-muted small">Academic administration portal for managing student profiles, attendance tracking, and grading results.</p>
+            </div>
+            <div class="p-2 border-top mt-auto">
+              <span class="badge-tech">Django</span>
+              <span class="badge-tech">PostgreSQL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Boipoka Online Bookstore -->
+        <div class="col-md-6 col-lg-4 project-item" data-category="fullstack">
+          <div class="custom-card p-3 h-100 d-flex flex-column">
+            <div id="boipokaCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
+              <div class="carousel-inner rounded-3">
+                <div class="carousel-item active">
+                  <img src="{% static 'base/images/boipoka/all_books.png' %}" class="d-block w-100" alt="Books" style="height: 180px; object-fit: cover;">
+                </div>
+                <div class="carousel-item">
+                  <img src="{% static 'base/images/boipoka/checkout.png' %}" class="d-block w-100" alt="Checkout" style="height: 180px; object-fit: cover;">
+                </div>
+              </div>
+            </div>
+            <div class="p-2 flex-grow-1">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="badge bg-primary-subtle text-primary fw-semibold">Full-Stack</span>
+                <span class="badge bg-dark text-white"><i class="bi bi-github me-1"></i> Open Source</span>
+              </div>
+              <h4 class="fw-bold mb-2">Boipoka - Online Bookstore</h4>
+              <p class="text-muted small">E-commerce book catalog featuring dynamic shopping carts, order checkouts, and billing workflows.</p>
+            </div>
+            <div class="p-2 border-top mt-auto d-flex justify-content-between align-items-center">
+              <div>
+                <span class="badge-tech">Django</span>
+                <span class="badge-tech">Bootstrap</span>
+              </div>
+              <a href="https://github.com/Abdullahalkafi4040/online-book-store-with-django" target="_blank" class="btn btn-sm btn-outline-dark rounded-pill">GitHub <i class="bi bi-box-arrow-up-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Task Management App -->
+        <div class="col-md-6 col-lg-4 project-item" data-category="fullstack">
+          <div class="custom-card p-3 h-100 d-flex flex-column">
+            <div id="taskCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
+              <div class="carousel-inner rounded-3">
+                <div class="carousel-item active">
+                  <img src="{% static 'base/images/task/task_show.png' %}" class="d-block w-100" alt="Task Show" style="height: 180px; object-fit: cover;">
+                </div>
+              </div>
+            </div>
+            <div class="p-2 flex-grow-1">
+              <span class="badge bg-primary-subtle text-primary mb-2 fw-semibold">Full-Stack</span>
+              <h4 class="fw-bold mb-2">Task Management App</h4>
+              <p class="text-muted small">Workflow Web App with interactive task status updates, categorization, and filtering views.</p>
+            </div>
+            <div class="p-2 border-top mt-auto">
+              <span class="badge-tech">Django</span>
+              <span class="badge-tech">JavaScript</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Multi-Vendor E-Commerce DRF API -->
+        <div class="col-md-6 col-lg-4 project-item" data-category="restapi">
+          <div class="custom-card p-3 h-100 d-flex flex-column">
+            <div id="ecommerceApiCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
+              <div class="carousel-inner rounded-3">
+                <div class="carousel-item active">
+                  <img src="{% static 'base/images/ecommerce_api/sslecomerz_payment.png' %}" class="d-block w-100" alt="SSLCommerz Payment" style="height: 180px; object-fit: cover;">
+                </div>
+                <div class="carousel-item">
+                  <img src="{% static 'base/images/ecommerce_api/cart_item.png' %}" class="d-block w-100" alt="Cart Items" style="height: 180px; object-fit: cover;">
+                </div>
+                <div class="carousel-item">
+                  <img src="{% static 'base/images/ecommerce_api/login_token.png' %}" class="d-block w-100" alt="Login Token" style="height: 180px; object-fit: cover;">
+                </div>
+                <div class="carousel-item">
+                  <img src="{% static 'base/images/ecommerce_api/order.png' %}" class="d-block w-100" alt="Order Processing" style="height: 180px; object-fit: cover;">
+                </div>
+                <div class="carousel-item">
+                  <img src="{% static 'base/images/ecommerce_api/products.png' %}" class="d-block w-100" alt="Product List" style="height: 180px; object-fit: cover;">
+                </div>
+                <div class="carousel-item">
+                  <img src="{% static 'base/images/ecommerce_api/payment_urls.png' %}" class="d-block w-100" alt="Payment URLs" style="height: 180px; object-fit: cover;">
+                </div>
+                <div class="carousel-item">
+                  <img src="{% static 'base/images/ecommerce_api/successfull_pyment.png' %}" class="d-block w-100" alt="Payment Success" style="height: 180px; object-fit: cover;">
+                </div>
+              </div>
+            </div>
+            <div class="p-2 flex-grow-1">
+              <span class="badge bg-success-subtle text-success mb-2 fw-semibold">REST API</span>
+              <h4 class="fw-bold mb-2">Multi-Vendor E-Commerce API</h4>
+              <p class="text-muted small">Scalable E-Commerce REST API with SSLCommerz payment integration, cart handling, and order management.</p>
+            </div>
+            <div class="p-2 border-top mt-auto">
+              <span class="badge-tech">Django REST</span>
+              <span class="badge-tech">SSLCommerz</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Blog Application DRF API -->
+        <div class="col-md-6 col-lg-4 project-item" data-category="restapi">
+          <div class="custom-card p-3 h-100 d-flex flex-column">
+            <div id="blogApiCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
+              <div class="carousel-inner rounded-3">
+                <div class="carousel-item active">
+                  <img src="{% static 'base/images/blog_api/swagger1.png' %}" class="d-block w-100" alt="Swagger 1" style="height: 180px; object-fit: cover;">
+                </div>
+                <div class="carousel-item">
+                  <img src="{% static 'base/images/blog_api/swagger2.png' %}" class="d-block w-100" alt="Swagger 2" style="height: 180px; object-fit: cover;">
+                </div>
+                <div class="carousel-item">
+                  <img src="{% static 'base/images/blog_api/jwt.png' %}" class="d-block w-100" alt="JWT Auth" style="height: 180px; object-fit: cover;">
+                </div>
+                <div class="carousel-item">
+                  <img src="{% static 'base/images/blog_api/render.png' %}" class="d-block w-100" alt="Render" style="height: 180px; object-fit: cover;">
+                </div>
+              </div>
+            </div>
+            <div class="p-2 flex-grow-1">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="badge bg-success-subtle text-success fw-semibold">REST API</span>
+                <span class="badge bg-dark text-white"><i class="bi bi-github me-1"></i> Open Source</span>
+              </div>
+              <h4 class="fw-bold mb-2">Blog Application DRF API</h4>
+              <p class="text-muted small">Open-source DRF API deployed on Render with JWT Auth, nested comments, and interactive Swagger UI docs.</p>
+            </div>
+            <div class="p-2 border-top mt-auto d-flex justify-content-between align-items-center">
+              <div>
+                <span class="badge-tech">DRF</span>
+                <span class="badge-tech">Render</span>
+              </div>
+              <a href="https://github.com/Abdullahalkafi4040/blog_app_with_django_rest_api" target="_blank" class="btn btn-sm btn-outline-dark rounded-pill">GitHub <i class="bi bi-box-arrow-up-right ms-1"></i></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-5">
+      <div class="text-center mb-5">
+        <h2 class="display-6 fw-bold">Educational Qualifications</h2>
+        <p class="text-muted">Academic background & certificates</p>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="custom-card p-4 p-md-5">
+            <div class="row g-4">
+              <div class="col-md-4">
+                <div class="p-3 border rounded-3 bg-light h-100">
+                  <span class="badge bg-success mb-2">2025</span>
+                  <h5 class="fw-bold">BSc in CSE</h5>
+                  <p class="text-muted small mb-0">Daffodil International University</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="p-3 border rounded-3 bg-light h-100">
+                  <span class="badge bg-secondary mb-2">2019</span>
+                  <h5 class="fw-bold">HSC</h5>
+                  <p class="text-muted small mb-0">Sunflower School and College Saidpur</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="p-3 border rounded-3 bg-light h-100">
+                  <span class="badge bg-secondary mb-2">2016</span>
+                  <h5 class="fw-bold">SSC</h5>
+                  <p class="text-muted small mb-0">Jobeda Begum High School Dinajpur</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+      <div class="text-center mb-5">
+        <h2 class="display-6 fw-bold">Connect With Me</h2>
+        <p class="text-muted">Feel free to reach out across social platforms or via email</p>
+      </div>
+      
+      <div class="row g-3 justify-content-center">
+        <div class="col-md-5 col-lg-3">
+          <a href="https://www.facebook.com/abdullah.al.kafi.504566" target="_blank" class="social-card">
+            <div class="social-icon"><i class="bi bi-facebook"></i></div>
+            <div>
+              <h6 class="fw-bold mb-0">Facebook</h6>
+              <small class="text-muted">Connect on FB</small>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-5 col-lg-3">
+          <a href="https://www.linkedin.com/in/abdullah-al-kafee-7a0b2720b/" target="_blank" class="social-card">
+            <div class="social-icon"><i class="bi bi-linkedin"></i></div>
+            <div>
+              <h6 class="fw-bold mb-0">LinkedIn</h6>
+              <small class="text-muted">Professional Profile</small>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-5 col-lg-3">
+          <a href="https://github.com/Abdullahalkafi4040" target="_blank" class="social-card">
+            <div class="social-icon"><i class="bi bi-github"></i></div>
+            <div>
+              <h6 class="fw-bold mb-0">GitHub</h6>
+              <small class="text-muted">Explore Repositories</small>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-5 col-lg-3">
+          <a href="mailto:abdulahalkafeee@gmail.com" class="social-card">
+            <div class="social-icon"><i class="bi bi-envelope-fill"></i></div>
+            <div>
+              <h6 class="fw-bold mb-0">Email</h6>
+              <small class="text-muted">abdulahalkafeee@gmail.com</small>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="text-center py-4 border-top text-muted small">
+    <p class="mb-0">&copy; 2026 Abdullah Al Kafi. Contact me at <a href="mailto:abdulahalkafeee@gmail.com" class="text-decoration-none text-success fw-semibold">abdulahalkafeee@gmail.com</a>.</p>
+  </footer>
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Filter Script -->
+  <script>
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectItems = document.querySelectorAll('.project-item');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filterValue = btn.getAttribute('data-filter');
+
+        projectItems.forEach(item => {
+          if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
